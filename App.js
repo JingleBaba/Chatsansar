@@ -1,21 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+//import dependencies
+import React, {useState, useEffect} from 'react';
+import { WebView } from 'react-native-webview';
+import { Camera } from 'expo-camera';
+import { StatusBar, Image, StyleSheet} from 'react-native';
+import { Audio } from 'expo-av';
 
-export default function App() {
+//remove console error for touchStart
+console.reportErrorsAsExceptions = false;
+
+//add additional permission when required
+const requiredPermissions = [
+ Audio.requestPermissionsAsync(), //sound
+ Camera.requestCameraPermissionsAsync(), //camera
+ Camera.requestMicrophonePermissionsAsync() //mic
+]
+
+//wait till all the permission are either granted or rejected.
+const checkAndTriggerPermission = async () => {
+  for(const permission of requiredPermissions) {
+    await permission;
+  }
+}
+
+export default () => {
+  const [permissions, setPermissions] = useState(false);
+  const [isLoaded, setLoader] = useState(false);
+  useEffect (() => {
+    (async () => {
+      const data = await checkAndTriggerPermission();
+      setPermissions(true)
+     })();
+  },[])
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar hidden = {false} /> 
+          {!isLoaded && (<Image source={require('./assets/icon.png')}
+          style= {styles.loading}/>)}
+      <WebView onLoad = {() => {setLoader(true)}} source={{ uri: 'https://kiwi.chatsansar.com/' }} />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  loading: {
+    marginTop: '8%'
   },
 });
+
+
+
