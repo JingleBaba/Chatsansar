@@ -16,7 +16,8 @@
     },
     
     "android": {
-      "package": "nepali.chatsansar.com"
+      "package": "nepali.chatsansar.com",
+      "versionCode": 2
     }
   }
 }
