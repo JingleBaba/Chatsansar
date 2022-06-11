@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "Nepali Chat",
+    "name": "Nepal Chat",
     "icon": "./assets/icon.png",
     "slug": "chatsansar",
-    "version": "2.0.0",
+    "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ],
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icon.png",
       "backgroundColor": "#ffffff"
     },
     "ios": {
@@ -16,8 +16,8 @@
     },
     
     "android": {
-      "package": "nepali.chatsansar.com",
-      "versionCode": 2
+      "package": "nepal.chatsansar.com",
+      "versionCode": 1
     }
   }
 }
